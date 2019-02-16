@@ -12,14 +12,11 @@ class CreateProject extends Component {
       [e.target.id]: e.target.value
     })
   }
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.createProject(this.state);
-  // }
   handleSubmit = (e) => {
     e.preventDefault();
-    //dispatchtoprops.action(para)
+    this.props.createProject(this.state);
   }
+  
   render() {
     return (
       <div className="container">
