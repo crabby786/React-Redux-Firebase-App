@@ -20,4 +20,4 @@ const ProjectReducer = (state= initState, action) => {
 }
 
 
-export default projectReducer;
+export default ProjectReducer;
