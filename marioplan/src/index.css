@@ -12,7 +12,12 @@ body {
   background-color: #95e8f3;
   min-height: 100%;
 }
-
+.spinner {
+  position: fixed;
+  left: 25%;
+  top:25%;
+  z-index: 10;
+}
 form{
   padding: 20px;
   margin-top: 60px;
