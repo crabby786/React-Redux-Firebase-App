@@ -18,9 +18,19 @@ body {
   top:25%;
   z-index: 10;
 }
+.tr {display: table-row}
+.td {display: table-cell;border: 1px solid;
+  min-width: 100px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: white;
+}
+.th {
+  background-color: cornsilk;
+}
 form{
   padding: 20px;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 
 form button, form h5{
@@ -40,4 +50,12 @@ textarea.materialize-textarea:focus:not([readonly]) + label,
 input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #ec407a !important;
+}
+select {display: block}
+label {
+  font-size: 1.0rem;
+color: #000;
+margin-top: 15px;
+display: inline-block;
+margin-left: 4px;
 }

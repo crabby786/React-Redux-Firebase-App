@@ -7,6 +7,7 @@ import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import CreateProject from "./components/projects/CreateProject";
 import UserList from "./components/projects/UserList";
+import socFilter from "./components/projects/soc.filter";
 
 class App extends Component {
   render() {
@@ -16,8 +17,8 @@ class App extends Component {
           <Navbar />
           
           <Switch>
-            <Route exact path="/" component={UserList} />
-            <Route exact path="/society" component={UserList} />
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/userlist" component={UserList} />
             <Route path="/project/:id" component={ProjectDetails} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />

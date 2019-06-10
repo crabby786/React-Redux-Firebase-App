@@ -6,32 +6,33 @@ import { object } from "prop-types";
 
 class SocFilter extends Component {
   render() {
-    var { filterFields, Soc } = this.props;
+    var { filterFields } = this.props;
+ 
     var newF = {};
-    var socArr = [];
-    socArr = Object.values(Soc[0]);
+    var socKeys = [];
+    socKeys = Object.keys(filterFields[0]);
     var opt = [];
-    //Soc[0][1]
-    var filterFieldsObj = filterFields.map(obj => (newF[obj] = ""));
+    var filterFieldsObj = filterFields[0];
     var ar1 = [];
     return (
       <Formik
         className="container"
-        onSubmit={(values, actions) => actions.props.filterSocAct(values)}
+        onSubmit={(values, actions) =>  this.props.filterSocAct(values,filterFields)}
+        // onSubmit={(values, actions) =>  console.log(this.props)}
         initialValues={filterFieldsObj || {}}
         render={props => (
           <Form className="white">
             {filterFields &&
-              filterFields.map((field,i) => {
+              socKeys.map((field,i) => {
                 // var opt = [];
                 let notRender = ["ठराव  परंतुका"];
                 if(notRender.indexOf(field)===-1)
                 return (
-                  <div key={field}>
+                  <div key={field} className="" >
                     <label htmlFor={field}>{field}</label>
                     <Field component="select" name={field} placeholder={field}>
-                      {Soc &&
-                        socArr.map(filterObj => {
+                      {filterFields &&
+                        filterFields.map(filterObj => {
                           let opt1 = filterObj[field];
                           if(ar1.indexOf(opt1) === -1){
                             ar1 = [...ar1,opt1];
@@ -60,7 +61,7 @@ class SocFilter extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    filterSocAct: cred => dispatch({ type: "update_soc", cred })
+    filterSocAct: (cred,data) => dispatch({ type: "update_soc", cred,data })
   };
 };
 const mapStateToProps = state => {
