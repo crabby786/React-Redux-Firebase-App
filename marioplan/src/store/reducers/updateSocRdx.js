@@ -1,14 +1,15 @@
 var filteredData2 = [
-   {
-    "तालुका रत्नागिरी": "मंडणगड",
-    "संस्था प्रकार कार्यालयाप्रमाणे": "शेती पतपुरवठा",
-    "संस्था प्रकार डी ओ प्रमाणे": "विविध कार्यकारी संस्था",
-    "संस्थेचे नांव": "पालवणी शेडवई विविध कार्यकारी सेवा सहकारी संस्था मर्या,  पालवणी",
-    "संस्थेचे कार्यक्षेत्र": "जिल्हा",
-    "लेखापरिक्षकाचे नाव": "परेश गजानन कर्णेकर",
-    "लेखापरिक्षक प्रकार": "शासकिय",
-    "पॅनल नंबर": " ERROR",
-    "ठराव __ परंतुका": "परंतुका",
+  {
+    "अ क्र": "",
+    "तालुका रत्नागिरी": "",
+    "संस्था प्रकार कार्यालयाप्रमाणे": "",
+    "संस्था प्रकार डी ओ प्रमाणे": "",
+    "संस्थेचे नांव": "",
+    "संस्थेचे कार्यक्षेत्र": "",
+    "लेखापरिक्षकाचे नाव": "",
+    "लेखापरिक्षक प्रकार": "",
+    "पॅनल नंबर": "",
+    "ठराव __ परंतुका": "",
     "लेखापरीक्षण पुर्ण दिनांक": "",
     "लेखापरीक्षण अहवाल प्राप्त दिनांक": "",
     "लेखा परीक्षण शुल्क आकारणी रु ": "",
@@ -19,25 +20,34 @@ var filteredData2 = [
     "सन 2017_18  दुरुस्ती अहवास  येणे दिनांक": "",
     "सन 2017_18 दोष दुरुस्ती अहवाल प्राप्त दिनांक": ""
   }
-]
-
+];
 
 const updateSocRdx = (state = filteredData2, action) => {
-    switch (action.type) {
-      case "update_soc":
-        state = [];  
-        var ob2 = Object.keys(action.cred).forEach(element => {          
-        var ob1 = action.data.filter(obj=>  {
-          return obj[element] == action.cred[element];
-        })
-        });
-          console.log(ob2);
-          return state ;
-  
-      default:
-        return state;
-    }
-  };
-  
-  export default updateSocRdx;
-  
+  switch (action.type) {
+    case "update_soc":
+      var label = Object.keys(action.cred);
+
+      state = action.data;
+      var newState = label.reduce((init, iteral, j, arr) => {
+        debugger;
+        if (init.length !== 0)
+          var filterData = init.filter((obj, i) => {
+            var key = iteral;
+            var formikValue = obj[key].toString().replace(/\s+/gi, " ");
+            if (obj[key] === undefined || action.cred[key] === "") {
+              return true;
+            } else {
+              return formikValue === action.cred[key];
+            }
+          });
+        return filterData;
+      }, state);
+
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+export default updateSocRdx;
