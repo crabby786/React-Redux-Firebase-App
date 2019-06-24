@@ -1,4 +1,4 @@
-html{
+html {
   min-height: 100%;
 }
 
@@ -6,20 +6,24 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url(/img/mario-bg.png) no-repeat;
+  /* background: url(/img/mario-bg.png) no-repeat; */
   background-size: 100%;
   background-position: bottom;
-  background-color: #95e8f3;
+  /* background-color: #95e8f3; */
   min-height: 100%;
 }
 .spinner {
   position: fixed;
   left: 25%;
-  top:25%;
+  top: 25%;
   z-index: 10;
 }
-.tr {display: table-row}
-.td {display: table-cell;border: 1px solid;
+.tr {
+  display: table-row;
+}
+.td {
+  display: table-cell;
+  border: 1px solid;
   min-width: 100px;
   text-align: center;
   vertical-align: middle;
@@ -28,34 +32,37 @@ body {
 .th {
   background-color: cornsilk;
 }
-form{
+form {
   padding: 20px;
   /* margin-top: 60px; */
 }
 
-form button, form h5{
+form button,
+form h5 {
   margin: 20px 0;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly]),
-input[type=email]:not(.browser-default):focus:not([readonly]),
-input[type=password]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]){
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
   border-color: #ec407a;
   box-shadow: none;
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
 textarea.materialize-textarea:focus:not([readonly]) + label,
-input[type=email]:not(.browser-default):focus:not([readonly]) + label,
-input[type=password]:not(.browser-default):focus:not([readonly]) + label{
+input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
+input[type="password"]:not(.browser-default):focus:not([readonly]) + label {
   color: #ec407a !important;
 }
-select {display: block}
+select {
+  display: block !important;
+}
 label {
-  font-size: 1.0rem;
-color: #000;
-margin-top: 15px;
-display: inline-block;
-margin-left: 4px;
+  font-size: 1rem;
+  color: #000;
+  margin-top: 15px;
+  display: inline-block;
+  margin-left: 4px;
 }

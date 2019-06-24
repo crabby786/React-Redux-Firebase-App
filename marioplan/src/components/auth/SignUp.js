@@ -1,49 +1,91 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { UserActions } from "../../store/actions/userActions";
 
 class SignUp extends Component {
   state = {
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-  }
-  handleChange = (e) => {
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: ""
+  };
+  handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
-    })
-  }
-  handleSubmit = (e) => {
+    });
+  };
+  handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
-  }
+    this.props.registerUser(this.state);
+  };
   render() {
     return (
       <div className="container">
-        <form className="white" onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Sign Up</h5>
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input type="email" id='email' onChange={this.handleChange} />
+        <div className="row">
+          <div className="col">
+            <div className="card">
+              <div className="card-header">Sign Up</div>
+              <div className="card-body">
+                <form onSubmit={this.handleSubmit}>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      className="form-control"
+                      type="email"
+                      id="email"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                      className="form-control"
+                      type="password"
+                      id="password"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="firstName">First Name</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="firstName"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="lastName">Last Name</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="lastName"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <br />
+                  <button className="btn btn-primary" type="submit">
+                    Sign Up
+                  </button>
+                </form>
+              </div>
+              {/* <div className="card-footer">
+          <button className="btn btn-primary" >Sign Up</button>
+          </div> */}
+            </div>
           </div>
-          <div className="input-field">
-            <label htmlFor="password">Password</label>
-            <input type="password" id='password' onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" id='firstName' onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="lastName">Last Name</label>
-            <input type="text" id='lastName' onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
-          </div>
-        </form>
+        </div>
       </div>
-    )
+    );
   }
 }
-
-export default SignUp
+// const mstp=(state) => {
+//   return state;
+// }
+const mdtp = dispatch => {
+  return { registerUser: user => dispatch(UserActions.register(user)) };
+};
+export default connect(
+  null,
+  mdtp
+)(SignUp);

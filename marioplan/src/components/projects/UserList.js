@@ -15,27 +15,13 @@ class UserList extends React.Component {
     const { Soc,data,filterList,filteredData  } = this.props;
     const flt = '/2303';
     /*to add json to firebase <button onClick={() => this.props.createProject()}>submit</button> */
-    var filteredData2 = [
-        {
-            "तालुका रत्नागिरी": "मंडणगड",
-            "संस्था प्रकार कार्यालयाप्रमाणे": "शेती पतपुरवठा",
-            "संस्था प्रकार डी ओ प्रमाणे": "विविध कार्यकारी संस्था",
-            "संस्थेचे नांव": "पालवणी शेडवई विविध कार्यकारी सेवा सहकारी संस्था मर्या,  पालवणी",
-        },
-        {
-                "तालुका रत्नागिरी": "dkjkj",
-                "संस्था प्रकार कार्यालयाप्रमाणे": "sdlkf पतपुरवठा",
-                "संस्था प्रकार डी ओ प्रमाणे": "saddkskl कार्यकारी संस्था",
-                "संस्थेचे नांव": "sddslk शेडवई विविध कार्यकारी सेवा सहकारी संस्था मर्या,  पालवणी",
-        }
-    ]
      if(filteredData == null || filteredData.length == 0)
      {return <div className="spinner" >
          <img src="/img/loading.gif" alt="loading"></img>
      </div>}
     else {
 
-        return <div className="">
+        return <div className="table table-striped">
             <div className="tr" style={{display:"table-row"}}>
             {
                 Object.keys(filteredData[0]).map((ob1,i)=>  

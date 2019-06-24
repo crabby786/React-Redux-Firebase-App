@@ -23,19 +23,26 @@ class SocFilter extends Component {
         // onSubmit={(values, actions) =>  console.log(this.props)}
         initialValues={filterFieldsObj || {}}
         render={props => (
-          <Form className="white">
+          <Form className="">
+            <div className="form-group">
+              <button className="btn btn-primary" type="submit" style={{}}>
+                submit
+              </button>
+            </div>
+
             {filterFields &&
               socKeys.map((field, i) => {
                 // var opt = [];
-                let notRender = ["ठराव  परंतुका", "अ क्र"];
+                let notRender = ["ठराव परंतुका", "अ क्र"];
                 if (notRender.indexOf(field) === -1)
                   return (
-                    <div key={field} className="">
+                    <div key={field} className="form-group">
                       <label htmlFor={field}>{field}</label>
                       <Field
                         component="select"
                         name={field}
                         placeholder={field}
+                        className="form-control"
                       >
                         {filterFields &&
                           filterFields.map(filterObj => {
@@ -55,16 +62,6 @@ class SocFilter extends Component {
                     </div>
                   );
               })}
-
-            <div className="input-field">
-              <button
-                className="btn pink lighten-1 z-depth-0"
-                type="submit"
-                style={{ position: "fixed", top: 0 }}
-              >
-                submit
-              </button>
-            </div>
           </Form>
         )}
       />

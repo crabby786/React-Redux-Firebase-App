@@ -1,57 +1,80 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { signIn } from '../../store/actions/authActions'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { signIn } from "../../store/actions/authActions";
+import { Redirect } from "react-router";
 
 class SignIn extends Component {
   state = {
-    email: '',
-    password: ''
-  }
-  handleChange = (e) => {
+    userName: "",
+    password: ""
+  };
+  handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
-    })
-  }
-  handleSubmit = (e) => {
+    });
+  };
+  handleSubmit = e => {
     e.preventDefault();
-    this.props.signIn(this.state)
-  }
+    this.props.signIn(this.state);
+  };
   render() {
     const { authError } = this.props;
     return (
       <div className="container">
-        <form className="white" onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Sign In</h5>
-          <div className="input-field">
+        <form className="card" onSubmit={this.handleSubmit}>
+          <h5 className="text-primary">Sign In</h5>
+          <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input type="email" id='email' onChange={this.handleChange} />
+            <input
+              className="form-control"
+              type="email"
+              id="userName"
+              onChange={this.handleChange}
+            />
           </div>
-          <div className="input-field">
+          <div className="form-group">
             <label htmlFor="password">Password</label>
-            <input type="password" id='password' onChange={this.handleChange} />
+            <input
+              className="form-control"
+              type="password"
+              id="password"
+              onChange={this.handleChange}
+            />
           </div>
-          <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
+          <div className="form-group">
+            <button className="btn btn-info" type="submit">
+              Login
+            </button>
+            <br />
+            <button
+              className="btn btn-primary"
+              onClick={() => this.props.history.push("/signup")}
+            >
+              sign up
+            </button>
             <div className="center red-text">
-              { authError ? <p>{authError}</p> : null }
+              {authError ? <p>{authError}</p> : null}
             </div>
           </div>
         </form>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
-  return{
-    authError: state.auth.authError
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = state => {
   return {
-    signIn: (creds) => dispatch(signIn(creds))
-  }
-}
+    authError: state.auth.authError
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: creds => dispatch(signIn(creds))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);
