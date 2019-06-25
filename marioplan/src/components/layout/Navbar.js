@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { createFirebaseConnect, helpers } from "react-redux-firebase";
 import { compose } from "redux";
+import { UserActions } from "../../store/actions/userActions";
+
 const { isLoaded, isEmpty, pathToJS, dataToJS } = helpers;
 
 class Navbar extends Component {
-  componentDidMount() {}
-
   render() {
-    const { auth, society, firebase } = this.props;
+    const { auth, society, firebase, logOut } = this.props;
     if (isEmpty(society) || !isLoaded(society)) {
       return (
         <div className="spinner">
@@ -24,34 +24,34 @@ class Navbar extends Component {
 
       return (
         <div>
-          <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+          <nav className="navbar navbar-expand-md bg-dark navbar-dark">
             <NavLink className="navbar-brand" to="#">
               Audit App
             </NavLink>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-toggle="collapse"
               data-target="#collapsibleNavbar"
             >
-              <span class="navbar-toggler-icon" />
+              <span className="navbar-toggler-icon" />
             </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-              <ul class="navbar-nav">
-                <li class="nav-item">
+            <div className="collapse navbar-collapse" id="collapsibleNavbar">
+              <ul className="navbar-nav">
+                <li className="nav-item">
                   <NavLink className="nav-link" to="#">
                     Link
                   </NavLink>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <NavLink className="nav-link" to="#">
                     Link
                   </NavLink>
                 </li>
-                <li class="nav-item">
-                  <NavLink className="nav-link" to="/signup">
-                    Signup
-                  </NavLink>
+                <li className="nav-item">
+                  <a href="#" className="nav-link" onClick={logOut}>
+                    logout
+                  </a>
                 </li>
                 {/* <li>
       <button onClick={() => firebase.watchEvent('value', '/')}>
@@ -59,7 +59,7 @@ class Navbar extends Component {
       </button>
       </li> */}
                 {/* <!-- Dropdown --> */}
-                <li class="nav-item dropdown">
+                <li className="nav-item dropdown">
                   <NavLink
                     className="nav-link dropdown-toggle"
                     to="#"
@@ -92,9 +92,17 @@ const mapStateToProps = state => {
     society: state.firebase.ordered
   };
 };
+const mapDispatchToProps = dispatch => {
+  return {
+    logOut: () => dispatch(UserActions.logout())
+  };
+};
 const firebaseConnect = createFirebaseConnect();
 
 export default compose(
   firebaseConnect([{ path: "/", queryParams: ["limitToFirst=2"] }]),
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(Navbar);

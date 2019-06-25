@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { Redirect } from "react-router";
+import { UserActions } from "../../store/actions/userActions";
 
 class SignIn extends Component {
   state = {
@@ -69,9 +70,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    signIn: creds => dispatch(signIn(creds))
-  };
+  // return {
+  //   signIn: creds => dispatch(signIn(creds))
+  // };
+  return { signIn: creds => dispatch(UserActions.login(creds)) };
 };
 
 export default connect(

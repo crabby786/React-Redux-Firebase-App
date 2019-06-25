@@ -9,7 +9,7 @@ const { isLoaded, isEmpty, pathToJS, dataToJS } = helpers;
 class Dashboard extends Component {
   render() {
     // console.log(this.props);
-    const { data1, filtersObj } = this.props;
+    const { data1, id, allUsers } = this.props;
     // if(Soc && Soc.length !== 0 ) var filters = ;
 
     if (isEmpty(data1)) {
@@ -34,6 +34,7 @@ class Dashboard extends Component {
           style={{ margin: "10px 20px" }}
         >
           <div className="row">
+            {allUsers && <h4>{JSON.stringify(allUsers[id])}</h4>}
             <div
               className="col-12 col-sm-4"
               style={{ overflow: "scroll", height: "calc(100vh - 50px)" }}
@@ -59,15 +60,17 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state);
+  //console.log(state);
   return {
     filtersObj: state.updateSocrdx,
     data1: state.firebase.ordered,
-    profile: state.firebase.profile
+    profile: state.firebase.profile,
+    id: state.firebase.auth.uid,
+    allUsers: state.firebase.data.users
   };
 };
 const firebaseConnect = createFirebaseConnect();
 export default compose(
-  // firebaseConnect(["/3-मंडणगड"]),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  firebaseConnect(["/users"])
 )(Dashboard);

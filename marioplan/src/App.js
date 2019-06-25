@@ -18,20 +18,19 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 
 class App extends Component {
-  componentDidMount() {
-    //var isLoggedIn = false;
-  }
   render() {
     const { isLoggedIn } = this.props;
-    return !isLoggedIn ? (
-      <Router history={history}>
-        <Switch>
-          <Route exact path="/" component={SignIn} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/login" component={SignIn} />
-        </Switch>
-      </Router>
-    ) : (
+
+    // (
+    //   <Router history={history}>
+    //     <Switch>
+    //       <Route exact path="/" component={SignIn} />
+    //       <Route path="/signup" component={SignUp} />
+    //       <Route path="/login" component={SignIn} />
+    //     </Switch>
+    //   </Router>
+    // ) :
+    return (
       <Router history={history}>
         <div className="App">
           <Navbar />

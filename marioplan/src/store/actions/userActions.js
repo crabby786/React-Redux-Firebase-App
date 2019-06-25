@@ -17,8 +17,8 @@ function login(creds) {
       .auth()
       .signInWithEmailAndPassword(creds.userName, creds.password)
       .then(user => {
-        dispatch({ type: "LOGIN_SUCCESS", user });
         history.push("/");
+        dispatch({ type: "LOGIN_SUCCESS", user });
       })
       .catch(err => {
         dispatch({ type: "LOGIN_ERROR", err });
@@ -33,6 +33,7 @@ function logout() {
       .auth()
       .signOut()
       .then(() => {
+        history.push("/login");
         dispatch({ type: "LOGOUT_SUCCESS" });
       });
   };
@@ -44,8 +45,10 @@ function register(user) {
       .auth()
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(user2 => {
-        firebase.set("users/" + user2.user.uid, { ...user });
-        history.push("/login");
+        let userId = user2.user.uid;
+        firebase.set("users/" + userId, { ...user });
+        dispatch({ type: "REGISTER_SUCCESS", userId });
+        history.push("/");
       })
       .catch(err => dispatch({ type: "REGISTER_FAILED", msg: err.message }));
   };
